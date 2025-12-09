@@ -11,7 +11,7 @@ export default function NewAgentForm(){
     const [error,setError]=useState("");
 
     useEffect(()=>{
-        toast.info("New agent form successfully loaded")
+        toast.info("New agent form successfully loaded",{position:"top-center"})
     },[])
 
     const handleCreate=async()=>{
