@@ -25,6 +25,11 @@ export default function LeadDetails() {
             followUp:false,
         },
     })
+    useEffect(()=>{
+        if(!loading && !error && lead){
+            toast.success("Lead details loaded successfully")
+        }
+    },[loading,error,lead])
 
     // Refresh comments when lead updates for lead
     useEffect(() => {
@@ -105,7 +110,7 @@ export default function LeadDetails() {
                 author: authorId,
                 commentText: newComment,
             };
-            const res = await fetch("http://localhost:3000/api/comments",{
+            const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/comments",{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(commentObj)
