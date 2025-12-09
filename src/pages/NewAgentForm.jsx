@@ -15,7 +15,7 @@ export default function NewAgentForm(){
     },[])
 
     const handleCreate=async()=>{
-        if(!name && !email){
+        if(!name || !email){
             setError("Both fields are required");
             return;
         }
@@ -65,7 +65,7 @@ export default function NewAgentForm(){
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Email Address:</label>
-                                <input type="text"className="form-control" placeholder="Ennter Email Address"
+                                <input type="email"className="form-control" placeholder="Enter Email Address"
                                     value={email}
                                     onChange={(e)=>setEmail(e.target.value)} 
                                 />

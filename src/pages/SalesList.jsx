@@ -35,7 +35,7 @@ export default function SalesList(){
                 </div>
                 {/* right-side bar */}
                 <div className="flex-grow-1  p-4 d-flex flex-column align-items-center">
-                    <h3 className="mb-4 tex-center">Sales Agent Lists</h3>
+                    <h3 className="mb-4 text-center">Sales Agent Lists</h3>
                     <div className="w-100 w-md-75 p-4 border-rounded  bg-light" style={{maxWidth:"600px"}}>
                         {loading && <p className="text-center">Loading...</p> }
                         {error && <p className="text-center">{error}</p> }

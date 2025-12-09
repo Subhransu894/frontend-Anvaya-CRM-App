@@ -22,9 +22,9 @@ export default function Report(){
     useEffect(()=>{
         const fetchData=async()=>{
             try {
-                const res1=await fetch("http://localhost:3000/api/reports/closed-pipeline")
-                const res2=await fetch("http://localhost:3000/api/reports/closed-by-agents")
-                const res3=await fetch("http://localhost:3000/api/reports/status-distribution")
+                const res1=await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/reports/closed-pipeline")
+                const res2=await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/reports/closed-by-agents")
+                const res3=await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/reports/status-distribution")
 
                 const data1 = await res1.json()
                 const data2 = await res2.json()

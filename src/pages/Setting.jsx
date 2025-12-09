@@ -41,7 +41,7 @@ export default function Setting(){
                 if(leadSuccess && agentSuccess){
                     toast.success("Leads and agents data load successfully")
                 }else{
-                    toast.error("Failed to loead some data")
+                    toast.error("Failed to loaded some data")
                 }
                 hasShownToast.current = true
             }
@@ -85,7 +85,7 @@ export default function Setting(){
            <nav className="bg-light d-flex justify-content-center align-items-center p-4">
                 <h2 style={{margin:0}}>Settings</h2>
            </nav>
-            <div className="containet mt-4 px-2 px-sm-3">
+            <div className="container mt-4 px-2 px-sm-3">
                 <h4 className="text-center mb-2">All Leads</h4>
                 <div className="table-responsive p-2 p-sm-3">
                     <table className="table table-bordered">

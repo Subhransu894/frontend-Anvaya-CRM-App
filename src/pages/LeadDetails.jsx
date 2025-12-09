@@ -265,14 +265,14 @@ export default function LeadDetails() {
                                             onChange={handleEditChange}
                                             id="tagHighVal"
                                         />
-                                        <label className="form-check-label" html="tagHighVal">High Value</label>
+                                        <label className="form-check-label" htmlFor="tagHighVal">High Value</label>
                                     </div>
                                     <div className="form-check">
                                         <input type="checkbox" className="form-check-input"  name="followUp" checked={editForm.tags.followUp} 
                                             onChange={handleEditChange}
                                             id="tagFollowUp"
                                         />
-                                        <label className="form-check-labe" htmlFor="tagFollowUp">Follow Up</label>
+                                        <label className="form-check-label" htmlFor="tagFollowUp">Follow Up</label>
                                     </div>  
                                 </div>
                                  <button className="btn btn-success mt-3 w-100" onClick={handleSaveData}>Save Changes</button>
