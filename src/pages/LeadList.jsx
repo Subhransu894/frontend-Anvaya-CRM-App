@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 import { useRef } from "react"
 export default function LeadList(){
     const navigate = useNavigate()
-    const {data,loading,error}=useFetch("http://localhost:3000/api/leads")
+    const {data,loading,error}=useFetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads")
     const leads = data?. lead || []
     const hasShownToast = useRef(false)
 
@@ -32,7 +32,7 @@ export default function LeadList(){
     useEffect(()=>{
         async function loadAgents(){
             try {
-                const res = await fetch("http://localhost:3000/api/sales-agents")
+                const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents")
                 const data = await res.json()
                 setAgents(data.agent || [])  
             } catch (error) {

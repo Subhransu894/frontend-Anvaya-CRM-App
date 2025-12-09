@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { toast } from "react-toastify";
 export default function LeadForm(){
-    const {data:agentData, loading:agentLoading, error:agentError}=useFetch("http://localhost:3000/api/sales-agents")
+    const {data:agentData, loading:agentLoading, error:agentError}=useFetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents")
     // console.log(agentData)
     const navigate = useNavigate()
     const[formData,setFormData]=useState({
@@ -62,7 +62,7 @@ export default function LeadForm(){
         }
 
         try {
-            const res =await fetch("http://localhost:3000/api/leads",{
+            const res =await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads",{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(submitData)

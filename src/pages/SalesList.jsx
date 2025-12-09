@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { useEffect } from "react"
 import { useRef } from "react"
 export default function SalesList(){
-    const {data,loading,error}=useFetch("http://localhost:3000/api/sales-agents")
+    const {data,loading,error}=useFetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents")
     const navigate = useNavigate()
     const hasShownToast = useRef(false)
 

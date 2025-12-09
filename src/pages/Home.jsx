@@ -3,7 +3,7 @@ import { useFetch } from "../hooks/useFetch"
 import { useState } from "react";
 export default function Home(){
     const navigate = useNavigate()
-    const {data,loading,error}=useFetch("http://localhost:3000/api/leads")
+    const {data,loading,error}=useFetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads")
 
     const leads = data?.lead || [];
 

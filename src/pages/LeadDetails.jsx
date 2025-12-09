@@ -6,7 +6,7 @@ export default function LeadDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { data, loading, error } = useFetch(`http://localhost:3000/api/leads/${id}`);
+    const { data, loading, error } = useFetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/${id}`);
     const lead = data?.lead;
 
     const [comments, setComments] = useState(lead?.comments || []);
@@ -68,7 +68,7 @@ export default function LeadDetails() {
             ...editForm,
             tags:tagArray,
         }
-        const res =await  fetch(`http://localhost:3000/api/leads/update/${id}`,{
+        const res =await  fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/update/${id}`,{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(submitData),
@@ -87,7 +87,7 @@ export default function LeadDetails() {
         if(!id) return
         
         async function fetchComments(){
-            const res = await fetch(`http://localhost:3000/api/comments/lead/${id}`);
+            const res = await fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/comments/lead/${id}`);
             const data = await res.json()
             if(res.ok){
                 setComments(data.comments || [])

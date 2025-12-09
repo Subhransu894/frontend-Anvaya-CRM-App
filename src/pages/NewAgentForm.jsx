@@ -18,7 +18,7 @@ export default function NewAgentForm(){
         setLoading(true)
         setError("")
         try {
-            const res = await fetch("http://localhost:3000/api/sales-agents",{
+            const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents",{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({name,email})
