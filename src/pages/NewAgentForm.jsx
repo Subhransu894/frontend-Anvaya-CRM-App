@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useFetch } from "../hooks/useFetch"
 import { toast } from "react-toastify"
 export default function NewAgentForm(){
@@ -9,6 +9,10 @@ export default function NewAgentForm(){
     const [name,setName]=useState("")
     const [loading,setLoading]=useState(false)
     const [error,setError]=useState("");
+
+    useEffect(()=>{
+        toast.info("New agent form successfully loaded")
+    },[])
 
     const handleCreate=async()=>{
         if(!name && !email){
