@@ -2,14 +2,26 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 export default function LeadDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { data, loading, error } = useFetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/${id}`);
-    const lead = data?.lead;
+    //toast effect restrict to only once
+    const loadedOnce = useRef(false)
 
-    const [comments, setComments] = useState(lead?.comments || []);
+    const { data, loading, error } = useFetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/${id}`);
+    // const lead = data?.lead;
+    const [leadData,setLeadData]=useState(null)
+
+    useEffect(()=>{
+        if(data?.lead){
+            setLeadData(data.lead)
+        }
+    },[data])
+
+    const [allAgents,setAllAgents]=useState([])
+    const [comments, setComments] = useState(leadData?.comments || []);
     const [newComment, setNewComment] = useState("");
 
     const [isEditing,setIsEditing]=useState(false);
@@ -26,29 +38,46 @@ export default function LeadDetails() {
         },
     })
     useEffect(()=>{
-        if(!loading && !error && lead){
-            toast.success("Lead details loaded successfully")
+        if(!loading && !error && data?.lead && !loadedOnce.current){
+            toast.success("Lead details loaded successfully") 
+            loadedOnce.current = true
         }
-    },[loading,error,lead])
+    },[loading,error,leadData])
 
+    useEffect(()=>{
+        async function fetchAgents(){
+            try {
+                const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents")
+                const data = await res.json()
+                const agentsArr = Array.isArray(data.agent) ? data.agent : []
+                setAllAgents(agentsArr)
+                console.log("All agents", agentsArr)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAgents()
+    },[])
     // Refresh comments when lead updates for lead
     useEffect(() => {
-        if(lead){
-            setComments(lead.comments || [])
+        if(!leadData || !allAgents.length) return;
+
+            const assigned = leadData.salesAgent?._id || leadData.salesAgent
+            const agentObj = allAgents.find((a)=>a._id == assigned)
+
             setEditForm({
-                name:lead.name,
-                source: lead ?. source,
-                status: lead?. status,
-                priority: lead?.priority,
-                timeToClose: lead?.timeToClose,
-                salesAgent: lead.salesAgent ?._id || lead.salesAgent,
+                name:leadData.name,
+                source: leadData ?. source,
+                status: leadData?. status,
+                priority: leadData?.priority,
+                timeToClose: leadData?.timeToClose,
+                salesAgent: agentObj || null,
                 tags:{
-                    highValue: lead.tags?.includes("highValue") || false,
-                    followUp: lead.tags?.includes("followUp") || false,
+                    highValue: leadData.tags?.includes("highValue") || false,
+                    followUp: leadData.tags?.includes("followUp") || false,
                 },
             });
-        }
-    }, [lead]);
+    }, [leadData,allAgents]);
 
     const handleEditChange = (e)=>{
         const {name,value,type,checked}=e.target
@@ -71,6 +100,7 @@ export default function LeadDetails() {
                     .map(([k])=>k)
         const submitData = {
             ...editForm,
+            salesAgent: editForm.salesAgent._id,
             tags:tagArray,
         }
         const res =await  fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/update/${id}`,{
@@ -81,12 +111,22 @@ export default function LeadDetails() {
         if(res.ok){
             toast.success("Lead updated successfully")
             setIsEditing(false)
-            window.location.reload() //update UI
+            // window.location.reload() //update UI
+
+            setLeadData({
+                ...leadData,
+                ...submitData,
+                salesAgent:editForm.salesAgent
+            })
         }else{
             alert("Failed to update lead");
         }
     }
 
+    const handleAgentChange=(e)=>{
+        const selected = allAgents.find((a)=>a._id === e.target.value);
+        setEditForm((prev)=>({...prev,salesAgent: selected || null}))
+    }
     //useeffect foor comment
     useEffect(()=>{
         if(!id) return
@@ -104,7 +144,7 @@ export default function LeadDetails() {
     const handleAddComment = async() => {
         if (!newComment.trim()) return;
         try {
-            const authorId = typeof lead.salesAgent === "object" ? lead.salesAgent._id : lead.salesAgent;
+            const authorId = typeof leadData.salesAgent === "object" ? leadData.salesAgent._id : leadData.salesAgent;
              const commentObj = {
                 lead: id,
                 author: authorId,
@@ -118,7 +158,15 @@ export default function LeadDetails() {
             const data =await res.json()
             if(res.ok){
                 toast.success("Commennt added")
-                setComments((prev)=>[...prev,data.message]);
+                //find the autor obj
+                const authorObj = typeof leadData.salesAgent === "object" ? leadData.salesAgent : allAgents.find((a)=>a._id === leadData.salesAgent);
+                //full comment obj
+                const newCommentObj = {
+                    ...data.message,
+                    author: authorObj
+                }
+                //add comment on ui
+                setComments((prev)=>[...prev,newCommentObj]);
                 setNewComment("");
             }else{
                 alert("Failed to add comment")
@@ -132,14 +180,14 @@ export default function LeadDetails() {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
-    if (!lead) return <p>No lead found</p>;
+    if (!leadData) return <p>No lead found</p>;
 
     return (
         <div>
             {/* NAVBAR */}
             <nav className="navbar navbar-light bg-light" style={{ height: "60px" }}>
                 <div className="container d-flex justify-content-center align-items-center h-100">
-                    <h3 className="m-0">Lead Management: {lead.name}</h3>
+                    <h3 className="m-0">Lead Management: {leadData.name}</h3>
                 </div>
             </nav>
 
@@ -162,12 +210,12 @@ export default function LeadDetails() {
 
                     {/* LEAD DETAILS BOX */}
                     <div className="border rounded p-3 mb-4">
-                        <p><strong>Name:</strong> {lead.name}</p>
-                        <p><strong>Sales Agent:</strong> {lead.salesAgent?.name || lead.salesAgent}</p>
-                        <p><strong>Source:</strong> {lead.source}</p>
-                        <p><strong>Status:</strong> {lead.status}</p>
-                        <p><strong>Priority:</strong> {lead.priority}</p>
-                        <p><strong>Time to Close:</strong> {lead.timeToClose} days</p>
+                        <p><strong>Name:</strong> {leadData.name}</p>
+                        <p><strong>Sales Agent:</strong> { leadData.salesAgent?.name || allAgents.find((a)=>a._id === leadData.salesAgent)?.name ||"Not Assigned"}</p>
+                        <p><strong>Source:</strong> {leadData.source}</p>
+                        <p><strong>Status:</strong> {leadData.status}</p>
+                        <p><strong>Priority:</strong> {leadData.priority}</p>
+                        <p><strong>Time to Close:</strong> {leadData.timeToClose} days</p>
 
                         <button className="btn btn-primary mt-2 w-100" onClick={()=>setIsEditing(true)}>Edit Lead details</button>
                     </div>
@@ -231,6 +279,16 @@ export default function LeadDetails() {
                                     <option value="Other">Other</option>
                                 </select>
 
+                                <label>Sales Agents:</label>
+                                <select name="salesAgent" value={editForm.salesAgent?._id || ""} 
+                                    className="form-control mb-2"onChange={handleAgentChange}
+                                >
+                                    <option value="">Select Agent</option>
+                                    {allAgents.map((agent)=>(
+                                        <option value={agent._id} key={agent._id}>{agent.name}</option>
+                                    ))}
+                                </select>
+
                                 <label>Status:</label>
                                 <select name="status" value={editForm.status} className="form-control mb-2"
                                     onChange={handleEditChange}
@@ -275,8 +333,8 @@ export default function LeadDetails() {
                                         <label className="form-check-label" htmlFor="tagFollowUp">Follow Up</label>
                                     </div>  
                                 </div>
-                                 <button className="btn btn-success mt-3 w-100" onClick={handleSaveData}>Save Changes</button>
-                                 <button className="btn btn-danger mt-2 w-100" onClick={()=>setIsEditing(false)}>Cancel</button>
+                                 <button type="button" className="btn btn-success mt-3 w-100" onClick={handleSaveData}>Save Changes</button>
+                                 <button type="button" className="btn btn-danger mt-2 w-100" onClick={()=>setIsEditing(false)}>Cancel</button>
                             </div>
 
                         </div>
