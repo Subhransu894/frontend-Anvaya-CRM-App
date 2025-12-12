@@ -6,7 +6,7 @@ Built with React frontend, Express/Node backend, MongoDB database.
 ---
 ## Demo Link 
 
-[Live Demo] ( https://frontend-anvaya-crm-app.vercel.app/ )
+[Live Demo]( https://frontend-anvaya-crm-app.vercel.app/ )
 
 ---
 ## Quick Start
@@ -21,45 +21,45 @@ npm run dev
 ---
 
 ## Technologies
--React Js
--React Router
--Node Js
--Express
--MongoDB
+- React Js
+- React Router
+- Node Js
+- Express
+- MongoDB
 
 ---
 
 ## Demo Video
 Watch a walkthrough of all the major features of this app:
-[Loom Video] (https://drive.google.com/file/d/1GheS2hSJ12hgByX8HH1eavjXeY7Lw8jO/view?usp=sharing)
+[Loom Video](https://drive.google.com/file/d/1GheS2hSJ12hgByX8HH1eavjXeY7Lw8jO/view?usp=sharing)
 
 ---
 
 ## Features
 **Home**
--Display the first 3 lead list with the satus of lead and a button to add new lead.
--Left side bar contains the browse link for different fields like e-commerce app.
+- Display the first 3 lead list with the satus of lead and a button to add new lead.
+- Left side bar contains the browse link for different fields like e-commerce app.
 
 **LeadList**
--Here you can see the list of leads with a button which is used to create new lead.
--In the leaft side bar there is a Back to Home button which takes us back to home page.
+- Here you can see the list of leads with a button which is used to create new lead.
+- In the leaft side bar there is a Back to Home button which takes us back to home page.
 
 **LeadDetails**
--View full information about one particular lead(name,agent name, status,source,priority,tags,time to close).
--Edit button to update name,agent name,source,status,priority,tags,time to close
--Comment section is there to store the coments with name and date.
--Submit button is there to make a comment.
+- View full information about one particular lead(name,agent name, status,source,priority,tags,time to close).
+- Edit button to update name,agent name,source,status,priority,tags,time to close
+- Comment section is there to store the coments with name and date.
+- Submit button is there to make a comment.
 
 **Agent**
--Display all the agents with a button to add a new agent.
--Left side bar has Back to Home button , which will take to Home.
+- Display all the agents with a button to add a new agent.
+- Left side bar has Back to Home button , which will take to Home.
 
 **Report**
--It has the details of Total Leads closed and in Pipeline,Leads closed by sales agent,Lead Status Distribution.
--All are in graph format.
+- It has the details of Total Leads closed and in Pipeline,Leads closed by sales agent,Lead Status Distribution.
+- All are in graph format.
 
 **Setting**
--Display All leads, All agents in tabular format and table header as name , email and action field.
+- Display All leads, All agents in tabular format and table header as name , email and action field.
 -Delete button is there in action field which will delete the particular data.
 
 ---
