@@ -37,18 +37,18 @@ Watch a walkthrough of all the major features of this app:
 
 ## Features
 **Home**
-- Display the first 3 lead list with the satus of lead and a button to add new lead.
+- Display the first three lead lists with the satus of lead and a button to add new lead.
 - Left side bar contains the browse link for different fields like e-commerce app.
 
 **LeadList**
 - Here you can see the list of leads with a button which is used to create new lead.
-- In the leaft side bar there is a Back to Home button which takes us back to home page.
+- In the left side bar there is a Back to Home button which takes us back to home page.
 
 **LeadDetails**
 - View full information about one particular lead(name,agent name, status,source,priority,tags,time to close).
 - Edit button to update name,agent name,source,status,priority,tags,time to close
 - Comment section is there to store the coments with name and date.
-- Submit button is there to make a comment.
+- Submit button is there to submit a comment successfully.
 
 **Agent**
 - Display all the agents with a button to add a new agent.
@@ -84,7 +84,7 @@ Sample Response: <br>
 Create a new agent<br>
 Sample Response: <br>
 ```
-{_id,agent name,email}
+{_id,agent name,email}...
 ```
 
 ### **DELETE /api/sales-agents/:id** <br>
