@@ -131,4 +131,4 @@ Sample Response: <br>
 
 ## Contact
 
-For bugs or featurs request, please reach out to subhransusekhar790@gmail.com
+For bugs or features request, please reach out to subhransusekhar790@gmail.com
