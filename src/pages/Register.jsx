@@ -6,6 +6,7 @@ const Register = ()=>{
     const [formData,setFormData]=useState({
         name:"",email:"",password:""
     })
+    const [showPassword,setShowPassword]=useState(false)
     const handleChange=(e)=>{
         setFormData({
             ...formData,
@@ -38,8 +39,14 @@ const Register = ()=>{
                     <div className="mb-3">
                         <input type="email" className="form-control" placeholder="Enter Your Email" name="email" value={formData.email} onChange={handleChange} required/>
                     </div>
-                    <div className="mb-3">
-                        <input type="password" className="form-control" placeholder="Enter Your Password" name="password" value={formData.password} onChange={handleChange} required/>
+                    <div className="mb-3 position-relative">
+                        <input type={showPassword ? "text" : "password"} className="form-control pe-5" placeholder="Enter Your Password" name="password" value={formData.password} onChange={handleChange} required/>
+                        <i 
+                            className={`bi ${showPassword ? "bi-eye-slash":"bi-eye"}`}
+                            onClick={()=>setShowPassword(!showPassword)}
+                            style={{position:"absolute",right:"15px",top:"50%",transform:"translateY(-50%)",cursor:"pointer",fontSize:"1.2rem"}}
+                        >
+                        </i>
                     </div>
                     <button type="submit" className="btn btn-success w-100">Register</button>
                 </form>

@@ -23,7 +23,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/' element={localStorage.getItem("token")?<Navigate to='/home'/> : <Navigate to='/register' />} />
+          <Route path='/' element={localStorage.getItem("token")?<Navigate to='/home'/> : <Navigate to='/login' />} />
           {/* Publiv route */}
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<Login/>}/>
@@ -35,7 +35,7 @@ function App() {
           <Route path='/salesList' element={<ProtectedRoute><SalesList/></ProtectedRoute>}/>
           <Route path='/agentForm' element={<ProtectedRoute><NewAgentForm/></ProtectedRoute>}/>
           <Route path='/report' element={<ProtectedRoute><Report/></ProtectedRoute>}/>
-          <Route path='/setting' element={<ProtectedRoute><Report/></ProtectedRoute>}/>
+          <Route path='/setting' element={<ProtectedRoute><Setting/></ProtectedRoute>}/>
         </Routes>
       </Router>
       <ToastContainer 

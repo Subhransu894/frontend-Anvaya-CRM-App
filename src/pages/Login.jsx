@@ -7,6 +7,7 @@ const Login =()=>{
     const [formData,setFormData]=useState({
         email:"",password:"",
     })
+    const [showPassword,setShowPassword]=useState(false)
     const handleChange = (e)=>{
         setFormData({
             ...formData,
@@ -35,10 +36,17 @@ const Login =()=>{
                     <div className="mb-3">
                         <input type="email" name="email" className="form-control" placeholder="Enter Email" value={formData.email} onChange={handleChange} required/>
                     </div>
-                    <div className="mb-3">
-                        <input type="password" name="password" className="form-control" placeholder="Enter Password" value={formData.password} onChange={handleChange} required/>
+                    <div className="mb-3 position-relative">
+                        <input type={showPassword ? "text" : "password"} name="password" className="form-control pe-5" placeholder="Enter Password" value={formData.password} onChange={handleChange} required/>
+                            <i 
+                                className={`bi ${showPassword ? "bi-eye-slash":"bi-eye"}`}
+                                onClick={()=>setShowPassword(!showPassword)}
+                                style={{position:"absolute",right:"15px",top:"50%",transform:"translateY(-50%)",cursor:"pointer",fontSize:"1.2rem"}}
+                            ></i>
                     </div>
-                    <button className="btn btn-primary w-100" type="submit">Login</button>
+                    <button className="btn btn-primary w-100" type="submit">
+                        Login
+                    </button>
                 </form>
                 <p className="mt-3 text-center">
                     NewUser ? <Link to="/register">Register</Link>
