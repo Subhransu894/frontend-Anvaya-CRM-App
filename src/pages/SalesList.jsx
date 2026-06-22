@@ -31,7 +31,7 @@ export default function SalesList(){
             <div className="d-flex" style={{minHeight:"100vh"}}>
                 {/* left-side bar */}
                 <div className="bg-light border-end p-4" style={{width:"220px"}}>
-                    <button className="btn btn-secondary w-100" onClick={()=>navigate("/")}>Back to Home</button>
+                    <button className="btn btn-secondary w-100" onClick={()=>navigate("/home")}>Back to Home</button>
                 </div>
                 {/* right-side bar */}
                 <div className="flex-grow-1  p-4 d-flex flex-column align-items-center">

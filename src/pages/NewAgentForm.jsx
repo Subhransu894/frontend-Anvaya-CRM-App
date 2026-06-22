@@ -54,7 +54,7 @@ export default function NewAgentForm(){
                <div className="d-flex " style={{minHeight:"100vh"}}>
                     {/* left-side bar */}
                     <div className="bg-light border-end" style={{width:"220px", padding:"20px"}}>
-                        <button className="btn btn-secondary w-100" onClick={()=>navigate("/")}>Back to Home</button>
+                        <button className="btn btn-secondary w-100" onClick={()=>navigate("/home")}>Back to Home</button>
                     </div>
                     {/* rifht-side bar */}
                     <div className="flex-grow-1 d-flex flex-column  align-items-center">

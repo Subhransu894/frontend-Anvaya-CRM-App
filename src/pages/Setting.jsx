@@ -165,7 +165,7 @@ export default function Setting(){
                 </div>
             </div>
             <div className="text-center mt-3">
-                <button className="btn btn-primary btn-sm"  onClick={()=>navigate("/")}>Back To Home</button>
+                <button className="btn btn-primary btn-sm"  onClick={()=>navigate("/home")}>Back To Home</button>
             </div>
         </div>
     )

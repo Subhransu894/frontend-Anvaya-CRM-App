@@ -117,7 +117,7 @@ export default function Report(){
             <div className="row" style={{height:"100vh"}}>
                 {/* left sidebar */}
                 <div className="col-12 col-md-3 col-lg-2 bg-light  border-end d-flex flex-column p-3">
-                    <button className="btn btn-secondary" onClick={()=>navigate("/")}>Back To Home</button>
+                    <button className="btn btn-secondary" onClick={()=>navigate("/home")}>Back To Home</button>
                 </div>
 
                 {/* right sidebar */}

@@ -86,7 +86,7 @@ export default function LeadList(){
                 <div className="border-end d-flex flex-column align-items-start p-3"
                  style={{width:"220px",background:"#f8f9fa",cursor:"pointer"}}
                 >
-                    <button className="btn btn-secondary mb-3" onClick={()=>navigate("/")}>
+                    <button className="btn btn-secondary mb-3" onClick={()=>navigate("/home")}>
                         Back to Home
                     </button>
                 </div>

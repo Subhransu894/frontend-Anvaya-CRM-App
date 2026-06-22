@@ -213,7 +213,7 @@ export default function LeadDetails() {
                 <div
                     className="border-end d-flex flex-column align-items-start p-3"
                     style={{ width: "220px", background: "#f8f9fa", cursor: "pointer" }}
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/home")}
                 >
                     <button className="btn btn-secondary mb-3">Back to Home</button>
                 </div>
