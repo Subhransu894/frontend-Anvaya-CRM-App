@@ -8,9 +8,16 @@ export default function Setting(){
     const navigate = useNavigate()
     const hasShownToast = useRef(false)
 
+    const token = localStorage.getItem("token")
+
     const fetchLead=async()=>{
         try {
-            const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads")
+            const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads",{
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
             if(!res.ok) throw new Error("Failed to fetch leads") 
             const data =await res.json()
             console.log("Agents Response: ",data);
@@ -23,7 +30,12 @@ export default function Setting(){
     };
     const fetchAgent= async()=>{
         try {
-            const res =await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents")
+            const res =await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents",{
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
             if(!res.ok) throw new Error("Failed to fetch agents") 
             const data =await res.json()
             setAgents(data.agent || [])
@@ -51,7 +63,13 @@ export default function Setting(){
 
     const deleteLead = async(id)=>{
         try{
-           const res= await fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/${id}`,{method:"DELETE"})
+           const res= await fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/${id}`,{
+            method:"DELETE",
+            headers:{
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
            const data = await res.json()
            if(res.ok){
                 fetchLead()
@@ -67,7 +85,13 @@ export default function Setting(){
     }
     const deleteAgent = async(id)=>{
         try {
-            const res=await fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents/${id}`,{method:"DELETE"})
+            const res=await fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents/${id}`,{
+                method:"DELETE",
+                headers:{
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
             const data = await res.json()
             if(res.ok){
                 fetchAgent()

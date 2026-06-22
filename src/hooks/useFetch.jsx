@@ -6,8 +6,11 @@ export  function useFetch(url){
     async function fetchData() {
         try {
             setLoading(true)
-        
-            const response = await fetch(url)
+            
+            const token = localStorage.getItem("token")
+            const response = await fetch(url,{
+                headers: token ? { Authorization: `Bearer ${token}`} : {}
+            })
             if(!response.ok){
                 throw new Error ("Failed to fetch Data")
             }

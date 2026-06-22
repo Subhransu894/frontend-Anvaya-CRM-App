@@ -31,8 +31,14 @@ export default function LeadList(){
 
     useEffect(()=>{
         async function loadAgents(){
+            const token = localStorage.getItem("token")
             try {
-                const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents")
+                const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents",{
+                    headers:{
+                        "Content-Type":"application/json",
+                        Authorization:`Bearer ${token}`
+                    }
+                })
                 const data = await res.json()
                 setAgents(data.agent || [])  
             } catch (error) {

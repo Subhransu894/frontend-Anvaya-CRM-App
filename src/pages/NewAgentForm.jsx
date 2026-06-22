@@ -21,10 +21,14 @@ export default function NewAgentForm(){
         }
         setLoading(true)
         setError("")
+        const token = localStorage.getItem("token")
         try {
             const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents",{
                 method:"POST",
-                headers:{"Content-Type":"application/json"},
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization:`Bearer ${token}`
+                },
                 body:JSON.stringify({name,email})
             })
             const data = await res.json()

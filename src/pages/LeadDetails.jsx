@@ -6,6 +6,7 @@ import { useRef } from "react";
 export default function LeadDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const token = localStorage.getItem("token")
 
     //toast effect restrict to only once
     const loadedOnce = useRef(false)
@@ -47,7 +48,12 @@ export default function LeadDetails() {
     useEffect(()=>{
         async function fetchAgents(){
             try {
-                const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents")
+                const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/sales-agents",{
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                })
                 const data = await res.json()
                 const agentsArr = Array.isArray(data.agent) ? data.agent : []
                 setAllAgents(agentsArr)
@@ -105,7 +111,10 @@ export default function LeadDetails() {
         }
         const res =await  fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads/update/${id}`,{
             method:"POST",
-            headers:{"Content-Type":"application/json"},
+            headers:{
+                "Content-Type":"application/json",
+                Authorization: `Bearer ${token}`
+            },
             body:JSON.stringify(submitData),
         });
         if(res.ok){
@@ -132,7 +141,12 @@ export default function LeadDetails() {
         if(!id) return
         
         async function fetchComments(){
-            const res = await fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/comments/lead/${id}`);
+            const res = await fetch(`https://backend-anvaya-crm-app-w3ca.vercel.app/api/comments/lead/${id}`,{
+                headers: {
+                   "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const data = await res.json()
             if(res.ok){
                 setComments(data.comments || [])
@@ -152,7 +166,10 @@ export default function LeadDetails() {
             };
             const res = await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/comments",{
                 method:"POST",
-                headers:{"Content-Type":"application/json"},
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization: `Bearer ${token}`
+                },
                 body:JSON.stringify(commentObj)
             });
             const data =await res.json()

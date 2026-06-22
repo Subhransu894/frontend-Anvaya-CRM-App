@@ -20,6 +20,10 @@ export default function Home(){
         const st = lead.status;
         statusCount[st]=(statusCount[st] || 0)+1
     })
+    const handleLogout = () =>{
+        localStorage.removeItem("token")
+        navigate("/login",{replace:true})
+    }
     return(
         <>
             <header>
@@ -41,6 +45,7 @@ export default function Home(){
                             <li className="p-2" style={{cursor:"pointer"}} onClick={()=>navigate("/salesList")}>Agents</li>
                             <li className="p-2" style={{cursor:"pointer"}} onClick={()=>navigate("/report")}>Reports</li>
                             <li className="p-2" style={{cursor:"pointer"}} onClick={()=>navigate("/setting")}>Settings</li>
+                            <button className="btn btn-danger w-100" onClick={handleLogout}>Logout</button>
                         </ul>
                     </div>
 

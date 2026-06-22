@@ -44,6 +44,7 @@ export default function LeadForm(){
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
+        const token = localStorage.getItem("token")
         setLoading(true)
         setError("")
         setSuccess("")
@@ -64,7 +65,10 @@ export default function LeadForm(){
         try {
             const res =await fetch("https://backend-anvaya-crm-app-w3ca.vercel.app/api/leads",{
                 method:"POST",
-                headers:{"Content-Type":"application/json"},
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization:`Bearer ${token}`
+                },
                 body:JSON.stringify(submitData)
             })
             const data = await res.json()
